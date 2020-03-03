@@ -31,8 +31,8 @@ define Package/luci-app-wizard/description
 endef
 
 define Build/Prepare
-	$(foreach po,$(wildcard ${CURDIR}/files/luci/i18n/*.po), \
-		po2lmo $(po) $(PKG_BUILD_DIR)/$(patsubst %.po,%.lmo,$(notdir $(po)));)
+	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
+	po2lmo ./po/zh-cn/wizard.zh-cn.po $(1)/usr/lib/lua/luci/i18n/wizard.zh-cn.lmo
 endef
 
 define Build/Configure
@@ -63,16 +63,16 @@ define Package/luci-app-wizard/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/wizard.*.lmo $(1)/usr/lib/lua/luci/i18n/
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
-	$(INSTALL_DATA) ./files/luci/controller/*.lua $(1)/usr/lib/lua/luci/controller/
+	$(INSTALL_DATA) ./luci/controller/*.lua $(1)/usr/lib/lua/luci/controller/
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi/wizard
-	$(INSTALL_DATA) ./files/luci/model/cbi/wizard/*.lua $(1)/usr/lib/lua/luci/model/cbi/wizard/
+	$(INSTALL_DATA) ./luci/model/cbi/wizard/*.lua $(1)/usr/lib/lua/luci/model/cbi/wizard/
 	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_DATA) ./files/root/etc/config/wizard $(1)/etc/config/wizard
+	$(INSTALL_DATA) ./root/etc/config/wizard $(1)/etc/config/wizard
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/root/etc/init.d/wizard $(1)/etc/init.d/wizard
+	$(INSTALL_BIN) ./root/etc/init.d/wizard $(1)/etc/init.d/wizard
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
-	$(INSTALL_DATA) ./files/root/etc/uci-defaults/40_luci-app-wizard $(1)/etc/uci-defaults/40_luci-app-wizard
-	$(INSTALL_DATA) ./files/uci.defaults $(1)/etc/uci-defaults/96-wizard-defaults
+	$(INSTALL_DATA) ./root/etc/uci-defaults/40_luci-app-wizard $(1)/etc/uci-defaults/40_luci-app-wizard
+	$(INSTALL_DATA) ./uci.defaults $(1)/etc/uci-defaults/96-wizard-defaults
 endef
 
 $(eval $(call BuildPackage,luci-app-wizard))
