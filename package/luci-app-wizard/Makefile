@@ -31,8 +31,7 @@ define Package/luci-app-wizard/description
 endef
 
 define Build/Prepare
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
-	po2lmo ./po/zh-cn/wizard.zh-cn.po $(1)/usr/lib/lua/luci/i18n/wizard.zh-cn.lmo
+
 endef
 
 define Build/Configure
@@ -73,6 +72,8 @@ define Package/luci-app-wizard/install
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_DATA) ./root/etc/uci-defaults/40_luci-app-wizard $(1)/etc/uci-defaults/40_luci-app-wizard
 	$(INSTALL_DATA) ./uci.defaults $(1)/etc/uci-defaults/96-wizard-defaults
+	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
+	po2lmo ./po/zh-cn/wizard.zh-cn.po $(1)/usr/lib/lua/luci/i18n/wizard.zh-cn.lmo
 endef
 
 $(eval $(call BuildPackage,luci-app-wizard))
