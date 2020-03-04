@@ -60,9 +60,9 @@ endef
 
 define Package/luci-app-wizard/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
-	$(INSTALL_DATA) ./luci/controller/*.lua $(1)/usr/lib/lua/luci/controller/
+	$(INSTALL_DATA) ./luasrc/controller/*.lua $(1)/usr/lib/lua/luci/controller/
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi/wizard
-	$(INSTALL_DATA) ./luci/model/cbi/wizard/*.lua $(1)/usr/lib/lua/luci/model/cbi/wizard/
+	$(INSTALL_DATA) ./luasrc/model/cbi/wizard/*.lua $(1)/usr/lib/lua/luci/model/cbi/wizard/
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_DATA) ./root/etc/config/wizard $(1)/etc/config/wizard
 	$(INSTALL_DIR) $(1)/etc/init.d
