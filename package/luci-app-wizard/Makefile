@@ -72,6 +72,7 @@ define Package/luci-app-wizard/install
 	$(INSTALL_DATA) ./uci.defaults $(1)/etc/uci-defaults/96-wizard-defaults
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
 	po2lmo ./po/zh-cn/wizard.po $(1)/usr/lib/lua/luci/i18n/wizard.po.zh-cn.lmo
+
 endef
 
 $(eval $(call BuildPackage,luci-app-wizard))
